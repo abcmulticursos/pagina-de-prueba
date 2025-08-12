@@ -253,25 +253,34 @@
             border: none;
         }
        
-        .countdown-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: var(--espacio-8mm) 0;
-        }
-        .countdown-item {
-            display: flex;
-            flex-direction: column;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: var(--redondez-cuadros);
-            min-width: 50px;
-            line-height: var(--interlineado-secundario);
-        }
-        .countdown-number {
-            font-size: 2rem;
-            font-weight: bold;
-        }
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: var(--espacio-8mm) 0;
+}
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-amarillo);
+    border: 3px solid var(--color-blanco);
+    border-radius: 7px;
+    padding: 10px 15px;
+    min-width: 50px;
+    line-height: 1.1;
+}
+.countdown-number {
+    font-family: var(--fuente-vag-rounded);
+    color: var(--fondo-oscuro);
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.countdown-label {
+    color: var(--fondo-oscuro);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
         .countdown-label {
             font-size: 0.8rem;
             text-transform: uppercase;
@@ -506,24 +515,24 @@ desde cero</span>
         <div class="text-center gotham-bold" style="font-size: 22pt; color: var(--color-amarillo); margin-top: 5mm; margin-bottom: 5mm;">
             EMPEZAMOS EN:
         </div>
-        <div class="countdown-container" style="margin-top: 5mm; margin-bottom: 5mm;">
-            <div class="countdown-item">
-                <span id="days" class="countdown-number">00</span>
-                <span class="countdown-label">DIAS</span>
-            </div>
-            <div class="countdown-item">
-                <span id="hours" class="countdown-number">00</span>
-                <span class="countdown-label">HORAS</span>
-            </div>
-            <div class="countdown-item">
-                <span id="minutes" class="countdown-number">00</span>
-                <span class="countdown-label">MINUTOS</span>
-            </div>
-            <div class="countdown-item">
-                <span id="seconds" class="countdown-number">00</span>
-                <span class="countdown-label">SEGUNDOS</span>
-            </div>
-        </div>
+        <div class="countdown-container" data-final-date="Nov 01, 2025 19:00:00" style="margin-top: 5mm; margin-bottom: 5mm;">
+    <div class="countdown-item">
+        <span id="days" class="countdown-number">00</span>
+        <span class="countdown-label">DÍAS</span>
+    </div>
+    <div class="countdown-item">
+        <span id="hours" class="countdown-number">00</span>
+        <span class="countdown-label">HRS</span>
+    </div>
+    <div class="countdown-item">
+        <span id="minutes" class="countdown-number">00</span>
+        <span class="countdown-label">MIN</span>
+    </div>
+    <div class="countdown-item">
+        <span id="seconds" class="countdown-number">00</span>
+        <span class="countdown-label">SEG</span>
+    </div>
+</div>
 
         <div class="spacer"></div>
 
@@ -559,27 +568,28 @@ desde cero</span>
     </div>
     
     <script>
-        const finalDate = new Date("Jun 16, 2025 19:00:00").getTime();
-        
-        const updateTimer = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = finalDate - now;
+    const countdownContainer = document.querySelector('.countdown-container');
+    const finalDate = new Date(countdownContainer.dataset.finalDate).getTime();
+    
+    const updateTimer = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = finalDate - now;
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById("days").innerHTML = String(days).padStart(2, '0');
-            document.getElementById("hours").innerHTML = String(hours).padStart(2, '0');
-            document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0');
-            document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
+        document.getElementById("days").innerHTML = String(days).padStart(2, '0');
+        document.getElementById("hours").innerHTML = String(hours).padStart(2, '0');
+        document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0');
+        document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
 
-            if (distance < 0) {
-                clearInterval(updateTimer);
-                document.getElementById("timer-container").innerHTML = "¡El evento ha comenzado!";
-            }
-        }, 1000);
-    </script>
+        if (distance < 0) {
+            clearInterval(updateTimer);
+            document.getElementById("timer-container").innerHTML = "¡El evento ha comenzado!";
+        }
+    }, 1000);
+</script>
 </body>
 </html>
