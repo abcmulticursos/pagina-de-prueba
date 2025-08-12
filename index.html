@@ -3,31 +3,474 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Primera Página Web en Netlify</title>
+    <title>Corte y Confección a la Medida</title>
+    
+    <meta property="og:title" content="¡Entrenamiento GRATUITO de Alta Costura en Vivo!">
+    <meta property="og:description" content="Aprende mis 5 técnicas secretas para elaborar cualquier prenda a la medida.">
+    <meta property="og:image" content="https://tu-pagina-web.netlify.app/images/miniatura.jpg">
+    <meta property="og:url" content="https://tu-pagina-web.netlify.app">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand:wght@700&display=swap" rel="stylesheet">
+    
     <style>
-        body {
-            font-family: sans-serif;
-            text-align: center;
-            background-color: #f0f4f8;
-            padding-top: 50px;
+        /* ========================================================================= */
+        /* OPCIONES DE CONFIGURACIÓN RÁPIDA (MODIFICA ESTOS VALORES FÁCILMENTE)     */
+        /* ========================================================================= */
+        :root {
+            --fondo-oscuro: #521064;
+            --color-titulo-superior: #ffffff;
+            --linea-gris: rgba(128, 128, 128, 0.3);
+            --linea-dorada: #ffd700;
+            --color-blanco: #ffffff;
+            --color-amarillo: #ffd700;
+            --color-boton-verde: #25D366;
+            --color-boton-rojo: #e30022;
+            --fuente-gotham: 'Poppins', sans-serif;
+            --fuente-vag-rounded: 'Quicksand', sans-serif; /* Alternativa a VAG Rounded */
+            --fuente-helvetica: 'Helvetica', 'Arial', sans-serif;
+            --espacio-8mm: 8mm;
+            --espacio-6mm: 6mm;
+            --espacio-arriba-abajo: 5mm;
+            --margen-lateral-fotos: 2mm;
+            --borde-delgado: 1px;
         }
+
+        body {
+            background-color: var(--fondo-oscuro);
+            font-family: var(--fuente-gotham);
+            color: var(--color-blanco);
+            margin: 0;
+            padding: 0;
+            line-height: 1.4;
+        }
+        
         .container {
-            background-color: #fff;
-            padding: 40px;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+        .yellow { color: var(--color-amarillo); }
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .gotham-bold { font-weight: 700; }
+        .gotham-light { font-weight: 400; }
+        .gotham-italic { font-style: italic; }
+        .gotham-bold-italic { font-weight: 700; font-style: italic; }
+
+        /* --- Título Superior --- */
+        .header {
+            background-color: #000000;
+            padding-top: var(--espacio-arriba-abajo);
+            padding-bottom: var(--espacio-arriba-abajo);
+            border-bottom: var(--borde-delgado) solid var(--linea-gris);
+        }
+        .header-text {
+            font-size: 9pt; /* Tamaño del texto del título */
+            text-align: center;
+            color: var(--color-titulo-superior);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+            /* Opciones para cambiar espaciado del texto: */
+            padding-left: 5px; /* Alejar a la derecha */
+            padding-right: 5px; /* Alejar a la izquierda */
+        }
+        .spacer { height: var(--espacio-8mm); }
+        .spacer-6mm { height: var(--espacio-6mm); }
+        .separator-line {
+            height: 1px;
+            background-color: var(--linea-dorada);
+            margin: 0 var(--espacio-8mm);
+        }
+
+        /* --- Texto principal con efecto de color --- */
+        .main-text {
+            font-family: var(--fuente-gotham);
+            font-weight: bold;
+            font-size: 1.8rem; /* Puedes cambiar el tamaño */
+            text-align: center;
+            line-height: 1.2;
+            padding: 0 var(--espacio-8mm);
+        }
+
+        /* --- Foto de la maestra --- */
+        .photo-container {
+            padding: 0 var(--margen-lateral-fotos);
+        }
+        .photo {
+            width: 100%;
+            border-radius: 15px; /* Bordes redondeados */
+            border: 1px solid var(--linea-gris); /* Borde gris del 30% */
+            box-sizing: border-box;
+            max-width: 100%;
+            height: auto;
+            /* Opciones para modificar espaciado, escala y borde: */
+            padding: 0; /* Espacio alrededor de la foto */
+            border-width: 1px; /* Grosor del borde */
+            border-color: rgba(128, 128, 128, 0.3); /* Color del borde */
+        }
+
+        /* --- Botones --- */
+        .button {
+            display: block;
+            margin: 0 var(--espacio-8mm);
+            padding: 15px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--color-blanco);
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+        .green-button { background-color: var(--color-boton-verde); }
+        .red-button {
+            background-color: var(--color-boton-rojo);
+            text-transform: uppercase;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+        
+        /* Efecto de pulso para el botón verde */
+        .pulse { animation: pulse-animation 2s infinite; }
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0px rgba(37, 211, 102, 0.6); }
+            100% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+        }
+
+        /* --- Contenedor de video (para video no incrustado) --- */
+        .video-player {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            border: 1px solid var(--linea-gris);
+            box-sizing: border-box;
+        }
+
+        /* --- Video Incrustado de YouTube --- */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 100%; /* Relación de aspecto 1:1 (cuadrado) */
+            height: 0;
+            overflow: hidden;
+            margin: 0 var(--margen-lateral-fotos);
+            border-radius: 15px;
+            border: 1px solid var(--linea-gris);
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- Cronómetro --- */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: var(--espacio-8mm) 0;
+        }
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            min-width: 50px;
+        }
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .countdown-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+        .image-vertical-pad {
+            padding: 0 1.5mm;
+        }
+        .rounded-box {
+            background-color: #000000;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: auto;
+            padding: 10px 20px;
+            text-align: center;
+            margin: 0 var(--espacio-8mm);
+        }
+        .costura-online-text {
+            font-family: var(--fuente-vag-rounded);
+            font-size: 16pt;
+            color: var(--color-blanco);
+        }
+        .purple-box {
+            background-color: #8e1bbf;
+            border-radius: 10px;
+            padding: 15px 20px;
+            text-align: center;
+            margin: 0 var(--espacio-8mm);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>¡Hola, Netlify!</h1>
-        <p>Esta es mi primera página web simple, subida de forma gratuita.</p>
-        <a href="https://www.netlify.com" target="_blank">
-            Conoce más sobre Netlify aquí
+        <div class="header">
+            <h1 class="header-text">CORTE Y CONFECCION A LA MEDIDA</h1>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="main-text">
+            Hola! Te invito a un <br>
+            <span class="yellow">Entrenamiento GRATUITO</span><br>
+            de Alta Costura - en Vivo!
+        </div>
+
+        <div class="spacer-6mm"></div>
+        <div class="separator-line"></div>
+        <div class="spacer-6mm"></div>
+
+        <div class="photo-container">
+            <img src="foto-maestra-experta.jpg" alt="Maestra experta en costura" class="photo">
+        </div>
+
+        <div class="spacer"></div>
+        <div class="separator-line"></div>
+        <div class="spacer"></div>
+
+        <div class="text-center gotham-bold" style="font-size: 10pt;">
+            <span class="yellow">[Lunes 16 de Junio]</span> 7:00
+            PM <span class="gotham-light">POR YOUTUBE</span>
+        </div>
+        
+        <div class="spacer-6mm"></div>
+        
+        <div class="text-center">
+            <img src="flechita-abajo.png" alt="Flecha hacia abajo" style="width: 1.3cm; height: 1.3cm;">
+        </div>
+
+        <div class="spacer-6mm"></div>
+        
+        <a href="https://chat.whatsapp.com/JcPpSPc1QdMDYUQag1vSZB" class="button green-button pulse">
+            TOCA Y UNETE A LA COMUNIDAD DE WHATSAPP PARA PARTICIPAR DEL EVENTO GRATUITO.
         </a>
+
+        <div class="spacer"></div>
+
+        <div class="text-center gotham-bold" style="font-size: 12pt;">
+            <span class="yellow">Aprende a crear tu primera prenda de vestir</span> en tan solo 2 lecciones <span class="gotham-light">(este texto que sigue en gotham light)</span> con la <span class="gotham-bold">INCREIBLE</span> <span class="yellow">TECNICA PREMIUM!!!</span>
+        </div>
+
+        <div class="spacer"></div>
+        
+        <div class="text-center">
+            <img src="isabel-vertical-masterclass.jpg" alt="Isabel Masterclass" style="width: 100%; max-width: 400px; height: auto;">
+        </div>
+        
+        <div class="spacer"></div>
+        <div class="separator-line" style="height: 1.5mm;"></div>
+        <div class="spacer"></div>
+        
+        <div class="rounded-box">
+            <span class="gotham-bold" style="font-size: 7pt; color: white;">UNETE A MI MASTERCLASS!!</span>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="text-center gotham-bold" style="font-size: 6pt;">
+            Aprende en nuestro taller,
+            <span class="yellow">[GRATUITO Y ONLINE,]</span> La
+            innovadora técnica de Costura y
+            Patronage Premium <span class="gotham-light">(este texto que sigue será Gotham light)</span> para crear
+            cualquier tipo de prenda a la
+            medida en <span class="gotham-bold">menos de 15 días...</span> <span class="gotham-light">(luego light)</span> Así
+            comiences desde cero.
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="main-text" style="font-size: 18pt;">
+            <span class="yellow">[LUNES 16 de Junio]</span> 7:00 PM <br>
+            <span class="gotham-light">POR YOUTUBE</span>
+        </div>
+
+        <div class="spacer"></div>
+
+        <a href="#" class="button red-button">
+            MIRA ESTE VIDEO!
+        </a>
+
+        <div class="spacer"></div>
+
+        <div class="video-wrapper">
+            <video class="video-player" controls preload="auto" poster="video-unete-a-nuestra-comunidad.jpg" autoplay="false" muted="false" src="video-unete-a-nuestra-comunidad.mp4"></video>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="text-center gotham-bold-italic" style="font-size: 1rem;">
+            <span class="yellow">¡Toca el botón y Unete a nuestra comunidad</span> para que participes gratuitamente!
+        </div>
+
+        <div class="spacer-6mm"></div>
+        
+        <div class="text-center">
+            <img src="flechita-abajo.png" alt="Flecha hacia abajo" style="width: 1.3cm; height: 1.3cm;">
+        </div>
+
+        <div class="spacer-6mm"></div>
+        
+        <a href="https://chat.whatsapp.com/JcPpSPc1QdMDYUQag1vSZB" class="button green-button pulse">
+            TOCA Y UNETE A LA COMUNIDAD DE WHATSAPP PARA PARTICIPAR DEL EVENTO GRATUITO.
+        </a>
+
+        <div class="spacer"></div>
+
+        <div class="text-center gotham-bold-italic" style="font-size: 16pt; line-height: 1.5;">
+            Al unirte a nuestra<br>
+            comunidad espero las<br>
+            instrucciones y el<br>
+            formulario para la toma<br>
+            de medidas que<br>
+            utilizaremos en clase, y<br>
+            también el molde de<br>
+            obsequio que te será<br>
+            útil en este aprendizaje
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="text-center gotham-bold-italic" style="font-size: 16pt; text-transform: uppercase;">
+            APRENDE A<br>
+            CONFECCIONAR<br>
+            <span class="yellow">PROYECTOS BIEN<br>
+            ELABORADOS!!</span>
+        </div>
+
+        <div class="spacer"></div>
+        
+        <div class="image-vertical-pad">
+            <img src="aprende-prendas-hermosas.png" alt="Aprende prendas hermosas" style="width: 100%; height: auto;">
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="text-center gotham-bold" style="color: var(--color-amarillo);">
+            RECUERDA:
+        </div>
+
+        <div class="spacer-6mm"></div>
+
+        <div class="text-center" style="font-size: 1rem;">
+            <span class="gotham-light">Para participar,</span> <span class="gotham-bold">no<br>
+            necesitas tener<br>
+            conocimientos de<br>
+            costura.</span>
+        </div>
+
+        <div class="spacer-6mm"></div>
+        
+        <div class="text-center">
+            <img src="mujer-senalando.png" alt="Mujer señalando" style="width: 100%; max-width: 400px; height: auto;">
+        </div>
+
+        <div class="spacer"></div>
+        <div class="separator-line"></div>
+        <div class="spacer"></div>
+
+        <div class="text-center gotham-bold-italic">
+            <span class="yellow">LOS CUPOS GRATUITOS<br>
+            SE ESTAN<br>
+            TERMINANDO,</span> UNETE<br>
+            A LA COMUNIDAD<br>
+            ANTES QUE PIERDAS<br>
+            EL TUYO!!
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="text-center gotham-bold" style="font-size: 1.2rem; color: var(--color-amarillo);">
+            EMPEZAMOS EN:
+        </div>
+        <div class="countdown-container">
+            <div class="countdown-item">
+                <span id="days" class="countdown-number">00</span>
+                <span class="countdown-label">DIAS</span>
+            </div>
+            <div class="countdown-item">
+                <span id="hours" class="countdown-number">00</span>
+                <span class="countdown-label">HORAS</span>
+            </div>
+            <div class="countdown-item">
+                <span id="minutes" class="countdown-number">00</span>
+                <span class="countdown-label">MINUTOS</span>
+            </div>
+            <div class="countdown-item">
+                <span id="seconds" class="countdown-number">00</span>
+                <span class="countdown-label">SEGUNDOS</span>
+            </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="text-center gotham-bold" style="font-size: 1rem;">
+            ESTE ES EL EVENTO Y<br>
+            YA ESTA PROXIMO A<br>
+            COMENZAR EN<br>
+            YOUTUBE
+        </div>
+
+        <div class="spacer-6mm"></div>
+        
+        <div class="text-center">
+            <img src="flechita-abajo.png" alt="Flecha hacia abajo" style="width: 1.3cm; height: 1.3cm;">
+        </div>
+
+        <div class="spacer-6mm"></div>
+        
+        <div class="video-wrapper">
+            <iframe src="https://youtube.com/embed/j15UvgMZxME?rel=0&amp;autoplay=0&amp;volume=1&amp;modestbranding=1" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="text-center gotham-bold-italic" style="font-size: 1rem; color: var(--color-blanco);">
+            TE ESPERAMOS!!
+        </div>
+        
+        <div class="spacer"></div>
+        <div class="text-center" style="font-size: 5pt; color: white;">
+            MASTERCLASS COSTURA | 2025 © GRUPO 97
+        </div>
     </div>
+    
+    <script>
+        // Lógica del cronómetro - CAMBIA ESTA FECHA
+        // El formato es: new Date("Mes Dia, Año Hora:Minuto:Segundo").getTime();
+        const finalDate = new Date("Jun 16, 2025 19:00:00").getTime();
+        
+        const updateTimer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = finalDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Muestra los números en formato de dos dígitos (ej: 07)
+            document.getElementById("days").innerHTML = String(days).padStart(2, '0');
+            document.getElementById("hours").innerHTML = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(updateTimer);
+                document.getElementById("timer-container").innerHTML = "¡El evento ha comenzado!";
+            }
+        }, 1000);
+    </script>
 </body>
 </html>
