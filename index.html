@@ -219,25 +219,20 @@
             100% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
         }
 
-        /* 5. Contenedor del video HTML5 (MODIFICADO a cuadrado) */
-        .video-container-cuadrado {
-            margin: 0 var(--margen-lateral-fotos);
-            border-radius: var(--redondez-contorno);
-            border: var(--grosor-contorno) solid var(--color-contorno);
-            box-sizing: border-box;
-            position: relative;
-            padding-bottom: 100%; /* Proporción 1:1 para cuadrado */
-            height: 0;
-            overflow: hidden;
-        }
-        .video-container-cuadrado video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+    /* 5. Contenedor del video HTML5 (MODIFICADO a flexible) */
+    .video-wrapper {
+        margin: 0 var(--margen-lateral-fotos);
+        border-radius: var(--redondez-contorno);
+        border: var(--grosor-contorno) solid var(--color-contorno);
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+    .video-wrapper video {
+        width: 100%;
+        height: auto;
+        display: block;
+        border: none;
+    }
         
         /* Contenedor de video de YouTube (mantiene la proporción 16:9) */
         .youtube-wrapper {
@@ -421,8 +416,8 @@ desde cero</span>
 
         <div class="spacer"></div>
 
-        <div class="video-container-cuadrado">
-            <video controls preload="auto" poster="images/video-poster.jpg" controlsList="nodownload" muted src="videos/video-unete-a-nuestra-comunidad.mp4"></video>
+        <div class="video-wrapper">
+            <video preload="auto" poster="images/portada-video-invitacion.jpg" controls controlsList="nodownload" src="videos/video-unete-a-nuestra-comunidad.mp4"></video>
         </div>
 
         <div class="spacer"></div>
