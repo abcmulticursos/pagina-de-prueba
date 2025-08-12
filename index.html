@@ -256,8 +256,10 @@
 .countdown-container {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin: var(--espacio-8mm) 0;
+    /* Opción para agregar espaciado lateral y evitar que se salga de la pantalla */
+    margin: var(--espacio-8mm) 3mm;
+    /* Opción para cambiar el espaciado entre los cuadros */
+    gap: 5px; 
 }
 .countdown-item {
     display: flex;
@@ -266,7 +268,8 @@
     background-color: var(--color-amarillo);
     border: 3px solid var(--color-blanco);
     border-radius: 7px;
-    padding: 10px 15px;
+    /* Opción para cambiar la escala del contador (Modifica el padding) */
+    padding: 10px;
     min-width: 50px;
     line-height: 1.1;
 }
@@ -279,12 +282,9 @@
 .countdown-label {
     color: var(--fondo-oscuro);
     font-size: 0.8rem;
+    font-weight: bold; /* Texto en negrita */
     text-transform: uppercase;
 }
-        .countdown-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-        }
         .image-vertical-pad { padding: 0 1.5mm; }
        
         /* 3. Botón "UNETE A MI MASTERCLASS!!" - MODIFICADO */
@@ -522,7 +522,7 @@ desde cero</span>
     </div>
     <div class="countdown-item">
         <span id="hours" class="countdown-number">00</span>
-        <span class="countdown-label">HRS</span>
+        <span class="countdown-label">HORAS</span>
     </div>
     <div class="countdown-item">
         <span id="minutes" class="countdown-number">00</span>
