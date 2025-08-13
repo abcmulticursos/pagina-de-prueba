@@ -568,6 +568,7 @@ desde cero</span>
     </div>
     
     <script>
+    // Tu script para el contador
     const countdownContainer = document.querySelector('.countdown-container');
     const finalDate = new Date(countdownContainer.dataset.finalDate).getTime();
     
@@ -586,17 +587,15 @@ desde cero</span>
         document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
 
         if (distance < 0) {
-    clearInterval(updateTimer);
-    document.getElementById("days").innerHTML = "00";
-    document.getElementById("hours").innerHTML = "00";
-    document.getElementById("minutes").innerHTML = "00";
-    document.getElementById("seconds").innerHTML = "00";
-}
+            clearInterval(updateTimer);
+            document.getElementById("days").innerHTML = "00";
+            document.getElementById("hours").innerHTML = "00";
+            document.getElementById("minutes").innerHTML = "00";
+            document.getElementById("seconds").innerHTML = "00";
+        }
     }, 1000);
-</script>
 
-<!-- CODIGO PARA LAZY CARGA -->
-    <script>
+    // Tu script para la carga diferida
     document.addEventListener('DOMContentLoaded', (event) => {
         const elementosParaCargaDiferida = document.querySelectorAll('img, iframe');
         elementosParaCargaDiferida.forEach(el => {
