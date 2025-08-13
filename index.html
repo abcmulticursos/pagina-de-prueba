@@ -595,31 +595,22 @@ desde cero</span>
         }
     }, 1000);
 
-    // Carga diferida de videos al hacer clic
-    document.addEventListener('DOMContentLoaded', () => {
-        const videoContainer = document.querySelector('.video-container');
-        if (videoContainer) {
-            const video = videoContainer.querySelector('video');
-            const button = videoContainer.querySelector('.play-button');
-
-            button.addEventListener('click', () => {
-                const videoSrc = video.getAttribute('data-src');
-                video.src = videoSrc;
-                video.load();
-                video.play();
-                button.style.display = 'none';
-            });
-        }
-    });
-
-    // Carga diferida de imágenes e iframes (la forma anterior sigue siendo buena)
+    // Tu script para la carga diferida, ahora mejorado
     document.addEventListener('DOMContentLoaded', (event) => {
-        const elementosParaCargaDiferida = document.querySelectorAll('img, iframe');
+        // Selecciona todas las imágenes, iframes y videos
+        const elementosParaCargaDiferida = document.querySelectorAll('img, iframe, video');
         elementosParaCargaDiferida.forEach(el => {
+            // Asegura que no sobreescriba si ya tienen el atributo
             if (!el.hasAttribute('loading')) {
                 el.setAttribute('loading', 'lazy');
             }
         });
+
+        // Cambia el atributo preload del video a "none" para evitar la precarga
+        const videoElement = document.querySelector('video');
+        if (videoElement && videoElement.hasAttribute('preload')) {
+            videoElement.setAttribute('preload', 'none');
+        }
     });
 </script>
 </body>
