@@ -594,5 +594,17 @@ desde cero</span>
 }
     }, 1000);
 </script>
+
+<!-- CODIGO PARA LAZY CARGA -->
+    <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const elementosParaCargaDiferida = document.querySelectorAll('img, iframe');
+        elementosParaCargaDiferida.forEach(el => {
+            if (!el.hasAttribute('loading')) {
+                el.setAttribute('loading', 'lazy');
+            }
+        });
+    });
+</script>
 </body>
 </html>
