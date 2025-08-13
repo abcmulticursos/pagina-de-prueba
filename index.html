@@ -425,7 +425,7 @@ desde cero</span>
 
         <div class="spacer"></div>
 
-        <div class="video-container">
+        <div class="video-wrapper">
             <video preload="auto" poster="images/portada-video-invitacion.jpg" controls controlsList="nodownload" src="videos/video-unete-a-nuestra-comunidad.mp4"></video>
         </div>
 
@@ -567,7 +567,7 @@ desde cero</span>
         </div>
     </div>
     
-<script>
+    <script>
     // Tu script para el contador
     const countdownContainer = document.querySelector('.countdown-container');
     const finalDate = new Date(countdownContainer.dataset.finalDate).getTime();
@@ -595,22 +595,14 @@ desde cero</span>
         }
     }, 1000);
 
-    // Tu script para la carga diferida, ahora mejorado
+    // Tu script para la carga diferida
     document.addEventListener('DOMContentLoaded', (event) => {
-        // Selecciona todas las imágenes, iframes y videos
-        const elementosParaCargaDiferida = document.querySelectorAll('img, iframe, video');
+        const elementosParaCargaDiferida = document.querySelectorAll('img, iframe');
         elementosParaCargaDiferida.forEach(el => {
-            // Asegura que no sobreescriba si ya tienen el atributo
             if (!el.hasAttribute('loading')) {
                 el.setAttribute('loading', 'lazy');
             }
         });
-
-        // Cambia el atributo preload del video a "none" para evitar la precarga
-        const videoElement = document.querySelector('video');
-        if (videoElement && videoElement.hasAttribute('preload')) {
-            videoElement.setAttribute('preload', 'none');
-        }
     });
 </script>
 </body>
